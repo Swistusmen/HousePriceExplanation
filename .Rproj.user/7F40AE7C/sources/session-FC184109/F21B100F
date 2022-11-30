@@ -1,0 +1,28 @@
+{
+    "id": "F21B100F",
+    "path": null,
+    "project_path": null,
+    "type": "object_explorer",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1669801318561.0,
+    "source_on_save": false,
+    "relative_order": 2,
+    "properties": {
+        "id": "7fb8edacb77d4381b93148056cd6000b",
+        "name": "b",
+        "title": "b",
+        "language": "R",
+        "source_window_id": "",
+        "Source": "Source"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1669796013,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1669801318561,
+    "read_only": false,
+    "read_only_alternatives": []
+}
