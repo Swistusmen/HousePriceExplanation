@@ -103,8 +103,36 @@ for (i in 1:length(scalar_variables)) {
   hist(scalar_variables[,i], main=names(scalar_variables[i]))
 }
 
-# dodac korelacje
-# dodac wspolczynnik zmiennosci
-# poradzic sobie ze zmiennymi odstajacymi
-# podzial na zbior testowy 
-# hellwig
+#wspolczynnik zmiennosci miedzy zmiennymi numerycznymi
+sapply(numerical_variables[], function(x) sd(x) / mean(x) * 100)
+correlationTable<- round(cor(numerical_variables,method="pearson"),,digits=4)
+#tablica korelacji zmiennych numerycznych
+correlationTable
+
+corPlot(numerical_variables, cex=0.8)
+
+# wykresy zaleznosci ceny od zmiennych numerycznych
+par(mfrow=c(2,2))
+plot(numerical_variables[][,1],house_data[,"price"], xlab=names(numerical_variables[1]), ylab=names(house_data["price"]))
+plot(numerical_variables[][,2],house_data[,"price"], xlab=names(numerical_variables[2]), ylab=names(house_data["price"]))
+plot(numerical_variables[][,3],house_data[,"price"], xlab=names(numerical_variables[3]), ylab=names(house_data["price"]))
+plot(numerical_variables[][,4],house_data[,"price"], xlab=names(numerical_variables[4]), ylab=names(house_data["price"]))
+plot(numerical_variables[][,5],house_data[,"price"], xlab=names(numerical_variables[5]), ylab=names(house_data["price"]))
+plot(numerical_variables[][,6],house_data[,"price"], xlab=names(numerical_variables[6]), ylab=names(house_data["price"]))
+plot(numerical_variables[][,7],house_data[,"price"], xlab=names(numerical_variables[7]), ylab=names(house_data["price"]))
+plot(numerical_variables[][,8],house_data[,"price"], xlab=names(numerical_variables[8]), ylab=names(house_data["price"]))
+plot(numerical_variables[][,9],house_data[,"price"], xlab=names(numerical_variables[9]), ylab=names(house_data["price"]))
+plot(numerical_variables[][,10],house_data[,"price"], xlab=names(numerical_variables[10]), ylab=names(house_data["price"]))
+plot(numerical_variables[][,11],house_data[,"price"], xlab=names(numerical_variables[11]), ylab=names(house_data["price"]))
+plot(numerical_variables[][,12],house_data[,"price"], xlab=names(numerical_variables[12]), ylab=names(house_data["price"]))
+
+# 3. Podzial zbiorow na testowy i uczacy
+smp_size <- floor(0.8 * nrow(house_data))
+set.seed(306511)
+train_ind <- sample(seq_len(nrow(house_data)), size = smp_size)
+train  <- house_data[train_ind, ]
+test   <- house_data[-train_ind, ]
+summary(train)
+summary(test)
+# 4. Dobor zmiennych do modelu
+# zdecydowalismy sie uzyc metody Hellwiga
