@@ -105,7 +105,7 @@ for (i in 1:length(scalar_variables)) {
 
 #wspolczynnik zmiennosci miedzy zmiennymi numerycznymi
 sapply(numerical_variables[], function(x) sd(x) / mean(x) * 100)
-correlationTable<- round(cor(numerical_variables,method="pearson"),,digits=4)
+correlationTable<- round(cor(numerical_variables,method="pearson"),digits=4)
 #tablica korelacji zmiennych numerycznych
 correlationTable
 
@@ -135,4 +135,19 @@ test   <- house_data[-train_ind, ]
 summary(train)
 summary(test)
 # 4. Dobor zmiennych do modelu
-# zdecydowalismy sie uzyc metody Hellwiga
+# jak najmniejsza korelacja miedzy objasniajacymi a jak najwieksza 
+columns<-colnames(house_data)
+noCol<- ncol(house_data)
+correlationsWithPrice<- data.frame(matrix(0,nrow=noCol-1,ncol=1))
+
+for(i in 2:20){
+  correlationsWithPrice[i-1,1]<-cor(house_data[,1],house_data[,i])
+}
+correlationsWithPrice
+
+#Najwieksza korelacja: (powyzej 0.5):4,11,18,3 (0.3-0.5):8,2  (podano numery kolumn)
+#znalezc te ktore nie maja korelacji ze soba i beda zmienne
+#powyzsze zautomatyzowac
+
+
+
