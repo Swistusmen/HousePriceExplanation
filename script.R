@@ -151,6 +151,10 @@ for(i in rowsWithCorrelationWithPrice){
   print("-------------------")
 }
 
-
 #Na podstawie wysokich korelacji z cena i niskich korelacji ze soba zdecydowano sie na wybor zmiennych:sqft_living, sqft_lot, view, yr_renovated
+finalTrainData<- train[c("price","sqft_living","sqft_lot","view","yr_renovated")]
 
+#5. Budowan modelu
+lm_1 = lm(price~ sqft_living + sqft_lot + view + yr_renovated  , data = finalTrainData) #Create the linear regression
+mod1_summary <-  summary(lm_1) 
+mod1_summary
