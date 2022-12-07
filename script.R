@@ -136,18 +136,21 @@ summary(train)
 summary(test)
 # 4. Dobor zmiennych do modelu
 # jak najmniejsza korelacja miedzy objasniajacymi a jak najwieksza 
-columns<-colnames(house_data)
-noCol<- ncol(house_data)
-correlationsWithPrice<- data.frame(matrix(0,nrow=noCol-1,ncol=1))
+correlationWithPriceTable<- round(cor(house_data,method="pearson"),digits=4)
+# uznalem ze korelacja z cena musi wynosic minimalnie 0.3
+sortedCorrelationWithPrice <- correlationWithPriceTable[order(correlationWithPriceTable[1,],decreasing=TRUE),]
+rowsWithCorrelationWithPrice2<- which(sortedCorrelationWithPrice[,1] > 0.3 & sortedCorrelationWithPrice[,1] < 1 , arr.ind=TRUE)
+rowsWithCorrelationWithPrice2
+rowsWithCorrelationWithPrice<- which(correlationWithPriceTable[,1] > 0.3 & correlationWithPriceTable[,1] < 1 , arr.ind=TRUE)
+rowsWithCorrelationWithPrice
 
-for(i in 2:20){
-  correlationsWithPrice[i-1,1]<-cor(house_data[,1],house_data[,i])
+for(i in rowsWithCorrelationWithPrice){
+  for(j in rowsWithCorrelationWithPrice){
+    print(correlationWithPriceTable[i,j])
+  }
+  print("-------------------")
 }
-correlationsWithPrice
-
-#Najwieksza korelacja: (powyzej 0.5):4,11,18,3 (0.3-0.5):8,2  (podano numery kolumn)
-#znalezc te ktore nie maja korelacji ze soba i beda zmienne
-#powyzsze zautomatyzowac
 
 
+#Na podstawie wysokich korelacji z cena i niskich korelacji ze soba zdecydowano sie na wybor zmiennych:sqft_living, sqft_lot, view, yr_renovated
 
